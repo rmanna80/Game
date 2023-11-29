@@ -20,22 +20,49 @@ class Game {
                                                               // different color
         for (int i = 0; i < answer.length; i++) {
             answer[i] = colors[(int) (Math.random() * colors.length)];
-        }    
-        System.out.println(Arrays.toString(answer)); // since the answer is in an array we used the toString method
+        }
+
+        // System.out.println(Arrays.toString(answer)); // since the answer is in an
+        // array we used the toString method
         Scanner scanner = new Scanner(System.in); // for the user to input the colors
         String allCorrect = ""; // originally set to am empty string then fix it in the fofr loop
         for (int i = 0; i < LENGTH; i++) {
             allCorrect += "h";
         }
-
+        System.out.println("Do you want to enter cheat mode? (y/n)");
         while (true) {
-            System.out.println("Enter in your guess");
+
+            boolean cheatMode = false;
+
+            String cheatInput = scanner.next().toLowerCase();
+
+            if (cheatInput.equals("y")) {
+                cheatMode = true;
+                System.out.println("Cheat mode activated. The answer is: " +
+                        Arrays.toString(answer));
+                System.out.println("Enter your guess: ");
+            } else if (cheatInput.equals("n")) {
+                cheatMode = false;
+                System.out.println("Enter your guess: ");
+            } else {
+                System.out.println("Invalid input. Please enter correct input");
+                continue; // Restart the loop if the input is invalid
+            }
+
+            // System.out.println("Enter in your guess");
             String[] guess = new String[LENGTH]; // guess is an array taking in the LENGTH which is 4
             boolean[] placed = new boolean[LENGTH]; // boolean expression to find the answer
             String feedback = ""; // set it as an empty string
 
             for (int i = 0; i < guess.length; i++) { // going through the guess array
                 guess[i] = scanner.next();
+                // if (cheatMode) {
+                // System.out.print(getCode(answer[i]) + SQUARE + RESET); // print the actual
+                // answer
+                // } else {
+                // System.out.print(getCode(guess[i]) + SQUARE + RESET); // printing the guess
+                // }
+
                 System.out.print(getCode(guess[i]) + SQUARE + RESET); // printing the guess
                 boolean place = false; // setting it to false
                 for (int j = 0; j < answer.length; j++) { // going through the answer array
@@ -91,4 +118,5 @@ class Game {
         }
         return result; // returning the result
     }
+
 }
